@@ -1,0 +1,39 @@
+============================= test session starts ==============================
+platform darwin -- Python 3.7.1, pytest-4.0.2, py-1.7.0, pluggy-0.8.0
+rootdir: /Users/parrt/grading/msds692/F19/recommender-samarthinani94, inifile:
+plugins: remotedata-0.3.1, openfiles-0.3.1, doctestplus-0.2.0, arraydiff-0.3
+collected 2 items
+
+test_server.py F.                                                        [100%]
+
+=================================== FAILURES ===================================
+__________________________________ test_links __________________________________
+
+    def test_links():
+        host = sys.argv[len(sys.argv) - 1]  # host is last arg
+        print("TESTING article list at " + host)
+    
+        f = open('articles.pkl', 'rb')
+        true_links = set(pickle.load(f))
+        f.close()
+        links = set(fetch_article_list())
+        if links!=true_links:
+            if links.issubset(true_links):
+>               assert False, "FAIL: article links missing: "+str(true_links.difference(links))
+E               AssertionError: FAIL: article links missing: {('/article/sport/130.txt', 'Weir poised for Sunderland move')}
+E               assert False
+
+test_server.py:66: AssertionError
+----------------------------- Captured stdout call -----------------------------
+TESTING article list at test_server.py
+=============================== warnings summary ===============================
+/Users/parrt/anaconda3/lib/python3.7/site-packages/html5lib/_trie/_base.py:3
+  /Users/parrt/anaconda3/lib/python3.7/site-packages/html5lib/_trie/_base.py:3: DeprecationWarning: Using or importing the ABCs from 'collections' instead of from 'collections.abc' is deprecated, and in 3.8 it will stop working
+    from collections import Mapping
+
+/Users/parrt/anaconda3/lib/python3.7/site-packages/socks.py:58
+  /Users/parrt/anaconda3/lib/python3.7/site-packages/socks.py:58: DeprecationWarning: Using or importing the ABCs from 'collections' instead of from 'collections.abc' is deprecated, and in 3.8 it will stop working
+    from collections import Callable
+
+-- Docs: https://docs.pytest.org/en/latest/warnings.html
+================ 1 failed, 1 passed, 2 warnings in 2.60 seconds ================
